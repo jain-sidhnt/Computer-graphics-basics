@@ -1,47 +1,63 @@
-#include<bits/stdc++.h> 
-using namespace std; 
+#include<stdio.h> 
   
 
-void midPoint(int X1, int Y1, int X2, int Y2) 
+void midPointCircleDraw(int x_centre, int y_centre, int r) 
 { 
+    int x = r, y = 0; 
+      
     
-    int dx = X2 - X1; 
-    int dy = Y2 - Y1; 
-  
-   
-    int d = dy - (dx/2); 
-    int x = X1, y = Y1; 
-  
-   
-    cout << x << "," << y << "\n"; 
-  
-   
-    while (x < X2) 
+    printf("(%d, %d) ", x + x_centre, y + y_centre); 
+      
+    
+    if (r > 0) 
     { 
-        x++; 
-  
+        printf("(%d, %d) ", x + x_centre, -y + y_centre); 
+        printf("(%d, %d) ", y + x_centre, x + y_centre); 
+        printf("(%d, %d)\n", -y + x_centre, x + y_centre); 
+    } 
+      
+   
+    int P = 1 - r; 
+    while (x > y) 
+    {  
+        y++; 
+          
        
-        if (d < 0) 
-            d = d + dy; 
-  
-        
+        if (P <= 0) 
+            P = P + 2*y + 1; 
+              
+       
         else
         { 
-            d += (dy - dx); 
-            y++; 
+            x--; 
+            P = P + 2*y - 2*x + 1; 
         } 
-  
-      
-        cout << x << "," << y << "\n"; 
-    } 
+          
+        
+        if (x < y) 
+            break; 
+          
+        
+        printf("(%d, %d) ", x + x_centre, y + y_centre); 
+        printf("(%d, %d) ", -x + x_centre, y + y_centre); 
+        printf("(%d, %d) ", x + x_centre, -y + y_centre); 
+        printf("(%d, %d)\n", -x + x_centre, -y + y_centre); 
+          
+       
+        if (x != y) 
+        { 
+            printf("(%d, %d) ", y + x_centre, x + y_centre); 
+            printf("(%d, %d) ", -y + x_centre, x + y_centre); 
+            printf("(%d, %d) ", y + x_centre, -x + y_centre); 
+            printf("(%d, %d)\n", -y + x_centre, -x + y_centre); 
+        } 
+    }  
 } 
   
 
 int main() 
 { 
-    
-  
-    int X1 = 2, Y1 = 2, X2 = 8, Y2 = 5; 
-    midPoint(X1, Y1, X2, Y2); 
+    // To draw a circle of radius 3 centred at (0, 0) 
+    midPointCircleDraw(0, 0, 3); 
     return 0; 
 } 
